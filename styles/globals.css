@@ -1,0 +1,469 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Nunito:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-dark: #1e2340;
+  --bg-card: #f5efe6;
+  --accent-gold: #c9a84c;
+  --accent-sand: #d4b896;
+  --accent-blue: #6b7fc4;
+  --text-primary: #ffffff;
+  --text-dark: #1e2340;
+  --text-muted: #8a8fa8;
+  --modal-bg: #6b7fc4;
+  --modal-bg-beige: #d4b896;
+  --border-ornament: #8a6a3a;
+  --nav-bg: #f0e8d8;
+  --tab-active: #1e2340;
+  --tab-inactive: #f0e8d8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  font-family: 'Nunito', sans-serif;
+  background: #111827;
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Mobile frame wrapper */
+.app-wrapper {
+  width: 390px;
+  height: 844px;
+  background: var(--bg-dark);
+  border-radius: 40px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+}
+
+/* Scrollable content area */
+.page-content {
+  height: calc(844px - 80px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 16px;
+  scrollbar-width: none;
+}
+.page-content::-webkit-scrollbar { display: none; }
+
+/* ===== TOP BAR ===== */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px 12px;
+}
+.top-bar .menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.top-bar .menu-btn span {
+  width: 24px;
+  height: 2px;
+  background: white;
+  border-radius: 2px;
+  display: block;
+}
+.top-bar .city {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  color: white;
+  letter-spacing: 0.5px;
+}
+
+/* ===== SEARCH BAR ===== */
+.search-bar {
+  margin: 0 16px 14px;
+  display: flex;
+  align-items: center;
+  background: #e8e0d4;
+  border-radius: 24px;
+  padding: 10px 16px;
+  gap: 10px;
+}
+.search-bar input {
+  background: none;
+  border: none;
+  outline: none;
+  flex: 1;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  color: #444;
+}
+.search-bar input::placeholder { color: #888; }
+.search-bar .search-icon { color: #555; font-size: 18px; }
+
+/* ===== TABS ===== */
+.tabs {
+  display: flex;
+  gap: 10px;
+  padding: 0 16px;
+  margin-bottom: 18px;
+}
+.tab-btn {
+  padding: 7px 18px;
+  border-radius: 20px;
+  border: 1.5px solid #e8e0d4;
+  background: transparent;
+  color: #e8e0d4;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.tab-btn.active {
+  background: #e8e0d4;
+  color: var(--bg-dark);
+}
+
+/* ===== SECTION TITLES ===== */
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  color: white;
+  padding: 0 16px;
+  margin-bottom: 12px;
+}
+
+/* ===== TOUR CARDS GRID ===== */
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 0 16px;
+  margin-bottom: 20px;
+}
+.tour-card {
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--bg-card);
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.tour-card:hover { transform: scale(1.02); }
+.tour-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  display: block;
+}
+.tour-card .card-info {
+  padding: 8px 10px 10px;
+  background: var(--bg-card);
+}
+.tour-card .card-info .ornament-line {
+  height: 6px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='6'%3E%3Cpath d='M0 3 Q12.5 0 25 3 Q37.5 6 50 3 Q62.5 0 75 3 Q87.5 6 100 3' stroke='%23c9a84c' fill='none' stroke-width='1.5'/%3E%3C/svg%3E") repeat-x center;
+  margin-bottom: 6px;
+}
+.tour-card .card-info h4 {
+  font-size: 11px;
+  color: var(--text-dark);
+  font-weight: 600;
+  margin-bottom: 2px;
+  line-height: 1.3;
+}
+.tour-card .card-info .price {
+  font-size: 11px;
+  color: #5a4a2a;
+  font-weight: 700;
+}
+
+/* ===== CRUISE CARDS ===== */
+.cruise-card {
+  margin: 0 16px 14px;
+  background: var(--bg-card);
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+.cruise-card .ornament-border {
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  height: 8px;
+  background: repeating-linear-gradient(90deg, var(--accent-gold) 0, var(--accent-gold) 4px, transparent 4px, transparent 8px);
+  opacity: 0.6;
+}
+.cruise-card .cruise-inner {
+  padding: 20px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.cruise-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  color: var(--text-dark);
+}
+.cruise-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.cruise-card .price {
+  font-size: 15px;
+  font-weight: 700;
+  color: #5a4a2a;
+}
+.cruise-card .ornament-left, .cruise-card .ornament-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 32px;
+  color: var(--accent-gold);
+  opacity: 0.5;
+}
+.cruise-card .ornament-left { left: 6px; }
+.cruise-card .ornament-right { right: 6px; }
+
+/* ===== MAP VIEW ===== */
+.map-container {
+  margin: 16px;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 240px;
+  position: relative;
+  background: #e8f4e8;
+}
+.map-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.map-zoom {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  gap: 4px;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.map-zoom button {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: white;
+  cursor: pointer;
+  font-size: 18px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== CULTURE CARDS ===== */
+.culture-card {
+  margin: 0 16px 12px;
+  background: var(--bg-card);
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  cursor: pointer;
+}
+.culture-card img {
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.culture-card .info h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  color: var(--text-dark);
+  margin-bottom: 5px;
+}
+.culture-card .info p {
+  font-size: 12px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* ===== REVIEW CARD ===== */
+.review-card {
+  background: white;
+  border-radius: 14px;
+  padding: 16px;
+  margin: 16px;
+}
+.stars { font-size: 20px; color: #ddd; margin-bottom: 8px; letter-spacing: 2px; }
+.review-card h3 { font-size: 15px; color: #222; margin-bottom: 4px; }
+.review-card .body { font-size: 13px; color: #666; margin-bottom: 10px; }
+.reviewer { display: flex; align-items: center; gap: 10px; }
+.reviewer img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+.reviewer .name { font-size: 13px; color: #333; font-weight: 600; }
+.reviewer .date { font-size: 11px; color: #999; }
+
+/* ===== BOTTOM NAV ===== */
+.bottom-nav {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 80px;
+  background: var(--nav-bg);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 10px 10px;
+  border-top: 1px solid #e0d4c0;
+}
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 12px;
+  transition: background 0.2s;
+  background: none;
+  border: none;
+}
+.nav-item:hover { background: rgba(0,0,0,0.06); }
+.nav-item.active { background: rgba(0,0,0,0.08); }
+.nav-item svg {
+  width: 28px;
+  height: 28px;
+}
+
+/* ===== MODAL ===== */
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+.modal-blue {
+  background: var(--modal-bg);
+  border-radius: 16px;
+  width: 290px;
+  overflow: hidden;
+  position: relative;
+}
+.modal-beige {
+  background: var(--modal-bg-beige);
+  border-radius: 16px;
+  width: 290px;
+  overflow: hidden;
+  position: relative;
+}
+.modal-ornament {
+  width: 100%;
+  height: 36px;
+  background: var(--bg-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.modal-ornament svg {
+  width: 100%;
+  height: 100%;
+}
+.modal-body {
+  padding: 20px 24px;
+}
+.modal-body label {
+  display: block;
+  font-size: 14px;
+  color: white;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+.modal-beige .modal-body label { color: #2a1a0a; }
+.modal-input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  margin-bottom: 14px;
+  outline: none;
+}
+.modal-blue .modal-input { background: #8b9bd4; color: white; }
+.modal-beige .modal-input { background: #c4a882; color: #333; }
+.modal-btn {
+  display: block;
+  margin: 0 auto 8px;
+  padding: 10px 30px;
+  border-radius: 8px;
+  border: none;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  background: var(--accent-gold);
+  color: white;
+}
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+/* ===== CITY MODAL ===== */
+.city-modal-input {
+  background: #3a4060;
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  font-size: 15px;
+  outline: none;
+  font-family: 'Nunito', sans-serif;
+}
+
+/* ===== SCHEDULE TABS ===== */
+.schedule-tabs {
+  display: flex; gap: 10px; padding: 0 16px; margin-bottom: 20px;
+}
+.schedule-tab {
+  padding: 7px 18px;
+  border-radius: 20px;
+  border: 1.5px solid #e8e0d4;
+  background: transparent;
+  color: #e8e0d4;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.schedule-tab.active {
+  background: #e8e0d4;
+  color: var(--bg-dark);
+}
+
+/* Scrollbar for body */
+body::-webkit-scrollbar { width: 0; }
